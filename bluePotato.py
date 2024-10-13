@@ -42,7 +42,7 @@ class append:
                 data[columnName] = np.ceil(average)
             elif mode == 4:
                 data[columnName] = np.ceil(average) 
-            return data
+            return data 
         
         def row(data:pd.DataFrame, f:int = 3, p:int = 1):
             if f:
