@@ -43,13 +43,13 @@ class append:
             if mode == 1:
                 data[columnName] = round(average,f)
             elif mode == 2:
-                data[columnName] = round(average/(10**(f-1)))*(10**(f-1))
+                data[columnName] = round(average//t*10)*t/10
             
             elif mode == 3:
                 f-=1
-                data[columnName] = np.ceil(average/(10**f))*(10**f)
+                data[columnName] = np.ceil(average/t)*t
             elif mode == 4:
-                data[columnName] = np.ceil(average*(10**f))/(10**f) 
+                data[columnName] = np.ceil(average*t)/t
             return data 
         
         def row(data:pd.DataFrame, f:int = 3, p:int = 1):
