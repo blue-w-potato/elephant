@@ -39,9 +39,10 @@ class append:
                 data[columnName] = round(average/(10**(f-1)))*(10**(f-1))
             
             elif mode == 3:
-                data[columnName] = np.ceil(average)
+                f-=1
+                data[columnName] = np.ceil(average/(10**f))*(10**f)
             elif mode == 4:
-                data[columnName] = np.ceil(average) 
+                data[columnName] = np.ceil(average*(10**f))/(10**f) 
             return data 
         
         def row(data:pd.DataFrame, f:int = 3, p:int = 1):
