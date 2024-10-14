@@ -5,10 +5,17 @@ import numpy as np
 class append:
     class Total:
         def column(data:pd.DataFrame, columnName:str = 'total'):
+            '''
+            data: 資料來源
+            columnName: 新欄名，預設"total"
+            '''
             data[columnName] = sum([data[i] for i in data.columns])
             return data
         
         def row(data:pd.DataFrame):
+            '''
+            data: 資料來源
+            '''
             data = data._append({i:data[i].sum() for i in data.columns}, ignore_index = True)
             return data
         
