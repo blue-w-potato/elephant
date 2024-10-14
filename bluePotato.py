@@ -4,7 +4,7 @@ import numpy as np
 
 class append:
     class Total:
-        def column(data:pd.DataFrame, columnName:str = 'total'):
+        def column(data:pd.DataFrame, columnName:str = 'total') -> pd.DataFrame:
             '''
             data: 資料來源
             columnName: 新欄名，預設"total"
@@ -12,7 +12,7 @@ class append:
             data[columnName] = sum([data[i] for i in data.columns])
             return data
         
-        def row(data:pd.DataFrame):
+        def row(data:pd.DataFrame) -> pd.DataFrame:
             '''
             data: 資料來源
             '''
@@ -20,7 +20,7 @@ class append:
             return data
         
     class Average:
-        def column(data:pd.DataFrame, columnName:str = 'total', f:int = 3, mode:int = 0):
+        def column(data:pd.DataFrame, columnName:str = 'total', f:int = 3, mode:int = 0) -> pd.DataFrame:
             '''
             data: 來源資料，型別一定要DataFrame
             colunName: 新欄的欄名
@@ -52,7 +52,7 @@ class append:
                 data[columnName] = np.ceil(average*t)/t
             return data 
         
-        def row(data:pd.DataFrame, f:int = 3, mode:int = 0):
+        def row(data:pd.DataFrame, f:int = 3, mode:int = 0) -> pd.DataFrame:
             '''
             data: 來源資料，型別一定要DataFrame
             rowName: 新列名
@@ -88,11 +88,26 @@ class append:
                 data = data._append(average, ignore_index = True)
             return data 
 
-    
-    
-class getTotal:
-    def column(data:pd.DataFrame, columnName:str = 'total'):
-        return pd.DataFrame({f'{columnName}':sum([data[i] for i in data.columns])})
-    
-    def row(data:pd.DataFrame):
-        return pd.DataFrame({i:data[i].sum() for i in data.columns})
+class json:
+    def rowColumn( data:dict ) -> pd.DataFrame:
+        '''
+        data: 來源資料
+        '''
+        name = list(data.keys())[0]
+        data = data[name]
+        columns = []
+        rows = range(len(data))
+        for row in rows:
+            for column in list(data[row].keys()):
+                if not(column in columns):
+                    columns.append(column)
+        Data = {}
+        for column in columns:
+            Data[column] = []
+            for row in rows:
+                if column in set(data[row].keys()):
+                    Data[column].append(data[row][column])
+                else:
+                    Data[column].append("無")
+        
+        return pd.DataFrame(Data)
