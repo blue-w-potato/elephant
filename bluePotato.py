@@ -31,7 +31,6 @@ class append:
         
     class Average:
         def column(data:pd.DataFrame, columnName:str = 'total', f:int = 3, mode:int = 0) -> pd.DataFrame:
-        def column(data:pd.DataFrame, columnName:str = 'total', f:int = 3, mode:int = 0) -> pd.DataFrame:
             '''
             data: 來源資料，型別一定要DataFrame
             colunName: 新欄的欄名
