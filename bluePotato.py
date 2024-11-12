@@ -168,3 +168,21 @@ class wget:
         fileName : 檔名
         '''
         www.download( url, f'{location}\\{fileName}')
+
+class excel:
+    
+    def sumif( Find:pd.Series, From:pd.Series, Range:pd.Series ) -> pd.Series:
+        
+        result = []
+        for i in Find:
+            result.append( sum( Range[ From == i ] ) )
+        
+        return pd.Series( result )
+    
+    def vlookup( Find:pd.Series, From:pd.Series, Range:pd.Series ) -> pd.Series:
+        
+        result = []
+        for i in Find:
+            result.append( Range[ From == i ][0] )
+        
+        return pd.Series( result )
